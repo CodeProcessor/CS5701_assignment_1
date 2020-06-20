@@ -9,7 +9,7 @@
 
 using namespace std;
 
-double bst_tree(const std::string& filename){
+double bst_tree(const std::string& filename, const std::string& search_file, const std::string& delete_file){
     int x;
     int sum;
 	ifstream inFile;
@@ -35,15 +35,14 @@ double bst_tree(const std::string& filename){
 //	bst_obj.print_in_order();
 	cout << "BST Tree" << endl;
 	cout << "Filename: " << filename << endl;
-	cout << "Tree height: " << tree_obj.height() << endl;
 
 	// Print elapsed time
 	std::chrono::duration<double> elapsed = finish - start;
-	cout << "Elapsed time: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Elapsed time for insert: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	inFile.close();
 
-	string search_file = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/search_data.txt";
 	ifstream searchFile;
 	searchFile.open(search_file);
 	if (!searchFile) {
@@ -64,13 +63,38 @@ double bst_tree(const std::string& filename){
 	// Print elapsed time
 	std::chrono::duration<double> elapsed2 = finish2 - start2;
 	cout << "Elapsed time for search: " << elapsed2.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	searchFile.close();
+
+	ifstream deleteFile;
+	deleteFile.open(delete_file);
+	if (!deleteFile) {
+		cerr << "Unable to open searchFile datafile.txt";
+		exit(1);   // call system to stop
+	}
+
+	// Record start time
+	auto start3 = std::chrono::high_resolution_clock::now();
+
+	while (deleteFile >> x) {
+		tree_obj.del(x);
+	}
+
+	// Record end time
+	auto finish3 = std::chrono::high_resolution_clock::now();
+
+	// Print elapsed time
+	std::chrono::duration<double> elapsed3 = finish3 - start3;
+	cout << "Elapsed time for delete: " << elapsed3.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
+
+	deleteFile.close();
 
 	return elapsed.count();
 }
 
-double splay_tree(const std::string& filename){
+double splay_tree(const std::string& filename, const std::string& search_file, const std::string& delete_file){
     int x;
     int sum;
 	ifstream inFile;
@@ -96,15 +120,14 @@ double splay_tree(const std::string& filename){
 	cout << "Splay Tree" << endl;
 //	bst_obj.print_in_order();
 	cout << "Filename: " << filename << endl;
-	cout << "Tree height: " << tree_obj.height() << endl;
 
 	// Print elapsed time
 	std::chrono::duration<double> elapsed = finish - start;
-	cout << "Elapsed time: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Elapsed time for insert: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	inFile.close();
 
-	string search_file = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/search_data.txt";
 	ifstream searchFile;
 	searchFile.open(search_file);
 	if (!searchFile) {
@@ -125,14 +148,39 @@ double splay_tree(const std::string& filename){
 	// Print elapsed time
 	std::chrono::duration<double> elapsed2 = finish2 - start2;
 	cout << "Elapsed time for search: " << elapsed2.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	searchFile.close();
+
+	ifstream deleteFile;
+	deleteFile.open(delete_file);
+	if (!deleteFile) {
+		cerr << "Unable to open searchFile datafile.txt";
+		exit(1);   // call system to stop
+	}
+
+	// Record start time
+	auto start3 = std::chrono::high_resolution_clock::now();
+
+	while (deleteFile >> x) {
+		tree_obj.del(x);
+	}
+
+	// Record end time
+	auto finish3 = std::chrono::high_resolution_clock::now();
+
+	// Print elapsed time
+	std::chrono::duration<double> elapsed3 = finish3 - start3;
+	cout << "Elapsed time for delete: " << elapsed3.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
+
+	deleteFile.close();
 
 	return elapsed.count();
 }
 
 
-double rb_tree(const std::string& filename){
+double rb_tree(const std::string& filename, const std::string& search_file, const std::string& delete_file){
     int x;
     int sum;
 	ifstream inFile;
@@ -158,15 +206,15 @@ double rb_tree(const std::string& filename){
 	cout << "RB Tree" << endl;
 //	bst_obj.print_in_order();
 	cout << "Filename: " << filename << endl;
-	cout << "Tree height: " << tree_obj.height() << endl;
 
 	// Print elapsed time
 	std::chrono::duration<double> elapsed = finish - start;
-	cout << "Elapsed time: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Elapsed time for insert: " << elapsed.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	inFile.close();
 
-	string search_file = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/search_data.txt";
+
 	ifstream searchFile;
 	searchFile.open(search_file);
 	if (!searchFile) {
@@ -187,8 +235,34 @@ double rb_tree(const std::string& filename){
 	// Print elapsed time
 	std::chrono::duration<double> elapsed2 = finish2 - start2;
 	cout << "Elapsed time for search: " << elapsed2.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
 
 	searchFile.close();
+
+	ifstream deleteFile;
+	deleteFile.open(delete_file);
+	if (!deleteFile) {
+		cerr << "Unable to open searchFile datafile.txt";
+		exit(1);   // call system to stop
+	}
+
+	// Record start time
+	auto start3 = std::chrono::high_resolution_clock::now();
+
+	while (deleteFile >> x) {
+		tree_obj.del(x);
+	}
+
+	// Record end time
+	auto finish3 = std::chrono::high_resolution_clock::now();
+
+	// Print elapsed time
+	std::chrono::duration<double> elapsed3 = finish3 - start3;
+	cout << "Elapsed time for delete: " << elapsed3.count() * 1000 * 1000 << " micro seconds\n";
+	cout << "Tree height: " << tree_obj.height() << endl;
+
+	deleteFile.close();
+
 
 	return elapsed.count();
 }
@@ -199,15 +273,17 @@ int main() {
 
 	string filename1 = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/data_1.txt";
 	string filename2 = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/data_2.txt";
+	string search_file = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/search_data.txt";
+	string delete_file = "/home/dulanj/eclipse-workspace/CS5701_assignment_1/src/data/delete_data.txt";
 
-    bst_tree(filename1);
-    bst_tree(filename2);
+    bst_tree(filename1, search_file, delete_file);
+    bst_tree(filename2, search_file, delete_file);
 
-    splay_tree(filename1);
-    splay_tree(filename2);
+    splay_tree(filename1, search_file, delete_file);
+    splay_tree(filename2, search_file, delete_file);
 
-    rb_tree(filename1);
-    rb_tree(filename2);
+    rb_tree(filename1, search_file, delete_file);
+    rb_tree(filename2, search_file, delete_file);
 
     return 0;
 }
